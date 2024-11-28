@@ -22,7 +22,7 @@ body,div,p, h1,h2,h3,h4,h5{
 }
 
 #section-zero {
-   height:20vh;
+   height:60vh;
 min-height:unset !important;
 }
 
@@ -92,7 +92,17 @@ max-width:400px;
   display:block;
 
 }
+@media (orientation:portrait){
+  .roads-animation0, .roads-animation1, .roads-animation2, .roads-animation3{
+ position:absolute;
+ top:0;
+ width:80vw;
+max-width:80vw;
+  display:block;
 
+}
+
+}
 .animation{
  
    
@@ -128,7 +138,7 @@ section{height:100vh;
 }
 
 .roads-animation0, .roads-animation2, .roads-animation1{
-  position:sticky;
+
     display:flex;
   top:60px;
     
@@ -256,7 +266,7 @@ line-height:1;}
    markers: true,
       id: 'anim' + i,
      toggleActions: "play pause reverse pause",
-      loop: true,
+     
      autoplay:false,
     
     
