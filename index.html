@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    
+    <title>Bryto</title>  
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap');
+      section{
+  display:flex;
+  min-height:100vh;
+  position:relative;
+  justify-content:center;
+}
+body,div,p, h1,h2,h3,h4,h5{
+  font-family:"Mulish", sans-serif;
+}
+
+ul{
+  list-style:none;
+}
+ul li{
+  display:flex;
+  align-items:center;
+  cursor:pointer;
+  margin-bottom:24px;
+}
+.activediv{
+  background:#C4DEF3;
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  margin-right:12px;
+}
+.progress.d-grey .activediv{
+  background:#C4DEF3;
+}
+.progress.passed .activediv{
+  background:#278FDE;
+}
+
+.roads-animation{
+  max-height:98vh;
+  width:auto;
+  display:flex;
+  position:relative;
+}
+#section-one{
+  background:#DCE6ED;
+}
+      </style>
+
+</head>
+<body class="loading">
+
+<section></section>
+ 
+
+
+<section id="section-one">
+  
+  <div class="roads-animation">
+    <div id="container" class="container"></div>
+ 
+</div>
+
+<div class="column">
+<h4>How It Works</h4>
+<h2>All we need is a location, planning has never been so easy!</h2>
+
+<ul class="progress-container">
+<li class="progress progress1 d-blue" data-slide="1"><div class="activediv" data-slide="1"><img src="images/arrow.svg"/></div>You give us the locations of your communities.</li>
+<li class="progress progress2" data-slide="2"><div class="activediv" data-slide="2"></div>We dispatch our boots-on-the-ground team to capture high quality 11K 360-degree street-level imagery.</li>
+<li class="progress progress3" data-slide="3"><div class="activediv" data-slide="3"></div>Our included Map Modification Service ensures any new road is added to the map.</li>
+<li class="progress progress4" data-slide="4"><div class="activediv" data-slide="4"></div>We meticulously process and color-grade the images.</li>
+<li class="progress progress5" data-slide="5"><div class="activediv " data-slide="5"></div>We then publish the images on Google Street View</li>
+<li class="progress progress6" data-slide="6"><div class="activediv" data-slide="6"></div>Potential home buyers can now virtually walk the streets on Google Street View.</li>
+</ul>
+
+</div>
+
+</section>
+
+  
+
+
+<section id="section-two">
+          
+  
+
+<div class="bg-wrap">
+
+        </div>
+
+       
+
+    </section>  
+    
+
+
+
+  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+
+<script src="https://unpkg.com/@lottiefiles/lottie-player@1.3.1/dist/lottie-player.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
+
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
+ 
+   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/ScrollTrigger.min.js"></script>
+ 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
+
+   
+    
+
+    
+
+    
+  
+
+
+
+    <script>
+$( document ).ready(function () {
+
+
+
+
+
+  gsap.registerPlugin(ScrollTrigger);
+
+ 
+        ScrollTrigger.matchMedia({	
+      // desktop
+      "(min-width: 991px)": function() {
+
+
+
+        const progressContainer = document.querySelector('.progress-container');
+const progress = Array.from(document.querySelectorAll('.progress'));
+const myslide = Array.from(document.querySelectorAll('.progress'));
+const animations = Array.from(document.querySelectorAll('lottie-player'));
+
+
+            var elem1 = document.getElementById('container')
+            var animData1 = {
+                container: elem1,
+                renderer: 'svg',
+                loop: false,
+                autoplay: false,   /*MAKE SURE THIS IS FALSE*/
+                rendererSettings: {
+                    progressiveLoad: false
+                },
+                path: 'data_roads.json',
+                name: 'main',
+            };
+            let playhead = { frame: 0 },
+            anim1 = bodymovin.loadAnimation(animData1);
+
+            //anim1.goToAndPlay(1, true);
+            
+
+
+anim1.addEventListener("DOMLoaded", function ()  {
+  
+  let tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#section-one",
+      pin: true,
+      scrub: true,
+      start: "top top",
+      end: "+=1650%",
+    toggleActions: "play reset play reset",
+     onUpdate: self => {
+         console.log((self.progress * (anim1.totalFrames - 1)).toFixed(0));
+      anim1.goToAndStop(self.progress * (anim1.totalFrames - 1), true);
+       
+      }
+   }
+  });
+  
+ 
+   tl
+  .to(".progress1", {
+  duration: 0.25, color: "orange",
+  onComplete: () => {
+    anim1.playSegments([100, 150], true);
+  }
+},'+=1').to(".progress2", {
+  duration: 0.25, color: "orange",
+  onComplete: () => {
+    anim1.playSegments([150, 220], true);
+  }
+},'+=2')
+
+.to(".progress3", {
+  duration: 0.25, color: "orange",
+  onComplete: () => {
+    anim1.playSegments([150, 220], true);
+  }
+},'+=3')
+
+.to(".progress4", {
+  duration: 0.25, color: "orange",
+  onComplete: () => {
+    anim1.playSegments([220, 320], true);
+  }
+},'+=4')
+.to(".progress5", {
+  duration: 0.25, color: "orange",
+  onComplete: () => {
+    anim1.playSegments([320, 420], true);
+  }
+},'+=5')
+.to(".progress6", {
+  duration: 0.25, color: "orange",
+  onComplete: () => {
+    anim1.playSegments([420, 520], true);
+  }
+},'+=6')
+});
+
+const playNext = (e) => {
+  const current = e && e.target;
+  console.log(e && e.target);
+ 
+  let next;
+let nextslide;
+  if (current) {
+    
+    const currentIndex = progress.indexOf(current);
+    const activediv=myslide[currentIndex];
+    if (currentIndex < progress.length) {
+      next = progress[currentIndex+1];
+     nextslide = myslide[currentIndex+1];
+    }
+    current.classList.remove('active');
+    current.classList.add('passed');
+    //activediv.classList.remove('d-blue');
+    //activediv.classList.add('d-grey');
+     current.classList.remove('d-blue');
+    current.classList.add('d-grey');
+  } 
+  
+  if (!next) {
+    myslide.map((ele) => {
+      ele.classList.remove('d-blue');
+      ele.classList.remove('passed');
+    })
+
+    progress.map((el) => {
+      el.classList.remove('active');
+      el.classList.remove('passed');
+    })
+
+    nextslide=myslide[0];
+    next = progress[0];
+   
+  } 
+  next.classList.add('active'); 
+  nextslide.classList.add('d-blue'); 
+
+}
+
+const clickHandler = (e) => {
+  const index = Math.floor(e.offsetY / (progressContainer.clientHeight/progress.length));
+
+  
+  const current = e && e.target;
+  console.log(e && e.target);
+ 
+  let next;
+let nextslide;
+
+
+  console.log('target:', e.target.getAttribute('data-slide'));
+    console.log('currentTarget:', e.currentTarget.getAttribute('data-slide'));
+      const slideindex=e.target.getAttribute('data-slide');
+
+      
+    animationCompleted = false;
+
+
+    const currentIndex = progress.indexOf(slideindex);
+    const activediv=myslide[slideindex];
+    if (currentIndex < progress.length) {
+      next = progress[slideindex+1];
+     nextslide = myslide[slideindex+1];
+    }
+    current.classList.remove('active');
+    current.classList.add('passed');
+    activediv.classList.remove('d-blue');
+    activediv.classList.add('d-grey');
+
+
+
+
+if (slideindex==1){
+  anim1.goToAndPlay(0, true);  
+}
+
+else if(slideindex==2){
+  anim1.goToAndPlay(160, true);  
+}
+else if(slideindex==3){
+  anim1.goToAndPlay(315, true);  
+}
+else if(slideindex==4){
+  anim1.goToAndPlay(415, true);  
+}
+else if(slideindex==5){
+  anim1.goToAndPlay(615, true);  
+}
+else if(slideindex==6){
+  anim1.goToAndPlay(815, true);  
+}
+
+
+
+
+
+}
+
+//progress.map(el => el.addEventListener("animationend", playNext, false));
+progress.map(el=> el.addEventListener("click", clickHandler, false));
+
+//playNext();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        triggerState = true;
+
+
+ 
+  
+  
+  
+
+
+ 
+  
+      },
+
+
+
+
+      // mobile
+      "(max-width: 992px)": function() {
+        // The ScrollTriggers created inside these functions are segregated and get
+        // reverted/killed when the media query doesn't match anymore. 
+
+        triggerState=false;
+
+         return function() {
+          gsap.kill(); 
+        //   other cleanup code can go here. 
+         };
+
+
+      },
+
+      // all 
+      "all": function() {
+     
+      }
+
+    });
+    
+
+
+    
+
+
+
+
+
+});
+
+
+
+
+        </script>
+</body>
+</html>
